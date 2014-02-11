@@ -23,3 +23,12 @@ C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\Dis
 C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\DispatcherCreator\obj\Debug\DispatcherCreator.csprojResolveAssemblyReference.cache
 C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\DispatcherCreator\obj\Debug\DispatcherCreator.exe
 C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\DispatcherCreator\obj\Debug\DispatcherCreator.pdb
+C:\Dev\DispatcherLibrary\DispatcherCreator\bin\Debug\DispatcherCreator.exe.config
+C:\Dev\DispatcherLibrary\DispatcherCreator\bin\Debug\DispatcherCreator.exe
+C:\Dev\DispatcherLibrary\DispatcherCreator\bin\Debug\DispatcherCreator.pdb
+C:\Dev\DispatcherLibrary\DispatcherCreator\bin\Debug\DispatcherLibrary.dll
+C:\Dev\DispatcherLibrary\DispatcherCreator\bin\Debug\sli-redis.dll
+C:\Dev\DispatcherLibrary\DispatcherCreator\bin\Debug\DispatcherLibrary.pdb
+C:\Dev\DispatcherLibrary\DispatcherCreator\obj\Debug\DispatcherCreator.csprojResolveAssemblyReference.cache
+C:\Dev\DispatcherLibrary\DispatcherCreator\obj\Debug\DispatcherCreator.exe
+C:\Dev\DispatcherLibrary\DispatcherCreator\obj\Debug\DispatcherCreator.pdb

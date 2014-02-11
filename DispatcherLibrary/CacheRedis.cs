@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using sli_redis;
 
-// This library uses booksleeve for redis communication
+// This library uses sli-redis for redis communication
 namespace DispatcherLibrary
 {
     public class CacheRedis : IServerAvailable
