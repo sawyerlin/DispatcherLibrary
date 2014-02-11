@@ -1,0 +1,18 @@
+C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\DispatcherConsumer\obj\Debug\DispatcherConsumer.csprojResolveAssemblyReference.cache
+C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\DispatcherConsumer\bin\Debug\DispatcherConsumer.exe.config
+C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\DispatcherConsumer\bin\Debug\DispatcherConsumer.exe
+C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\DispatcherConsumer\bin\Debug\DispatcherConsumer.pdb
+C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\DispatcherConsumer\bin\Debug\DispatcherLibrary.dll
+C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\DispatcherConsumer\bin\Debug\sli-redis.dll
+C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\DispatcherConsumer\bin\Debug\DispatcherLibrary.pdb
+C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\DispatcherConsumer\obj\Debug\DispatcherConsumer.exe
+C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\DispatcherConsumer\obj\Debug\DispatcherConsumer.pdb
+C:\Dev\DispatcherLibrary\DispatcherConsumer\bin\Debug\DispatcherConsumer.exe.config
+C:\Dev\DispatcherLibrary\DispatcherConsumer\bin\Debug\DispatcherConsumer.exe
+C:\Dev\DispatcherLibrary\DispatcherConsumer\bin\Debug\DispatcherConsumer.pdb
+C:\Dev\DispatcherLibrary\DispatcherConsumer\bin\Debug\DispatcherLibrary.dll
+C:\Dev\DispatcherLibrary\DispatcherConsumer\bin\Debug\sli-redis.dll
+C:\Dev\DispatcherLibrary\DispatcherConsumer\bin\Debug\DispatcherLibrary.pdb
+C:\Dev\DispatcherLibrary\DispatcherConsumer\obj\Debug\DispatcherConsumer.csprojResolveAssemblyReference.cache
+C:\Dev\DispatcherLibrary\DispatcherConsumer\obj\Debug\DispatcherConsumer.exe
+C:\Dev\DispatcherLibrary\DispatcherConsumer\obj\Debug\DispatcherConsumer.pdb

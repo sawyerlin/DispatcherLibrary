@@ -1,0 +1,18 @@
+C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\DispatcherMonitor\bin\Debug\DispatcherMonitor.exe.config
+C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\DispatcherMonitor\bin\Debug\DispatcherMonitor.exe
+C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\DispatcherMonitor\bin\Debug\DispatcherMonitor.pdb
+C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\DispatcherMonitor\bin\Debug\DispatcherLibrary.dll
+C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\DispatcherMonitor\bin\Debug\sli-redis.dll
+C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\DispatcherMonitor\bin\Debug\DispatcherLibrary.pdb
+C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\DispatcherMonitor\obj\Debug\DispatcherMonitor.csprojResolveAssemblyReference.cache
+C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\DispatcherMonitor\obj\Debug\DispatcherMonitor.exe
+C:\Users\slin\Documents\GitHub\Demos\C #\DispatcherLibrary\DispatcherLibrary\DispatcherMonitor\obj\Debug\DispatcherMonitor.pdb
+C:\Dev\DispatcherLibrary\DispatcherMonitor\bin\Debug\DispatcherMonitor.exe.config
+C:\Dev\DispatcherLibrary\DispatcherMonitor\bin\Debug\DispatcherMonitor.exe
+C:\Dev\DispatcherLibrary\DispatcherMonitor\bin\Debug\DispatcherMonitor.pdb
+C:\Dev\DispatcherLibrary\DispatcherMonitor\bin\Debug\DispatcherLibrary.dll
+C:\Dev\DispatcherLibrary\DispatcherMonitor\bin\Debug\sli-redis.dll
+C:\Dev\DispatcherLibrary\DispatcherMonitor\bin\Debug\DispatcherLibrary.pdb
+C:\Dev\DispatcherLibrary\DispatcherMonitor\obj\Debug\DispatcherMonitor.csprojResolveAssemblyReference.cache
+C:\Dev\DispatcherLibrary\DispatcherMonitor\obj\Debug\DispatcherMonitor.exe
+C:\Dev\DispatcherLibrary\DispatcherMonitor\obj\Debug\DispatcherMonitor.pdb
