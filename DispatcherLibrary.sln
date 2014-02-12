@@ -3,11 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DispatcherLibrary", "DispatcherLibrary\DispatcherLibrary.csproj", "{8E86B49C-1E31-405F-933D-BF67F392CF0B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1B1485FD-E9F0-4DF3-A5C3-81BF937A1AED}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DispatcherConsumer", "DispatcherConsumer\DispatcherConsumer.csproj", "{CEBB76BE-FD73-488D-96DA-64B85826254F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DispatcherCreator", "DispatcherCreator\DispatcherCreator.csproj", "{E9F7F43A-26F1-43BF-9A63-C7E633CD4A05}"

@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using sli_redis;
-
-// This library uses sli-redis for redis communication
+﻿// This library uses sli-redis for redis communication
 namespace DispatcherLibrary
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using sli_redis;
+
     public class CacheRedis : IServerAvailable
     {
         public string Host { get; private set; }
@@ -26,79 +27,62 @@ namespace DispatcherLibrary
 
         public List<Pool> GetPools()
         {
-            List<Pool> pools = new List<Pool>();
-
             var poolKeys = Client.Key.GetAll("Pool*");
 
-            foreach (string poolKey in poolKeys)
-            {
-                Dictionary<string, string> result = Client.Hash.GetAll(poolKey);
-                int id = int.Parse(result["Id"]);
-                string name = result["Name"];
-
-                pools.Add(new Pool(id, name, this));
-            }
-
-            return pools;
+            return (from poolKey in poolKeys
+                    select Client.Hash.GetAll(poolKey)
+                        into result
+                        let id = int.Parse(result["Id"])
+                        let name = result["Name"]
+                        select new Pool(id, name, this)).ToList();
         }
 
         public List<Worker> GetWorkersFromPool(Pool pool)
         {
             string hashId = pool.ToString();
-            List<Worker> workers = new List<Worker>();
 
             var workerKeys = Client.Key.GetAll("Worker*");
 
-            foreach (string workerKey in workerKeys)
-            {
-                Dictionary<string, string> result = Client.Hash.GetAll(workerKey);
-                if (result["PoolHashId"] == hashId)
-                {
-                    int id = int.Parse(result["Id"]);
-                    string name = result["Name"];
-                    int maxJobs = int.Parse(result["MaxJobs"]);
-                    int currentJobs = int.Parse(result["CurrentJobs"]);
-
-                    workers.Add(new Worker(id, name, maxJobs, currentJobs));
-                }
-            }
-            return workers;
+            return (from workerKey in workerKeys
+                    select Client.Hash.GetAll(workerKey)
+                        into result
+                        where result["PoolHashId"] == hashId
+                        let id = int.Parse(result["Id"])
+                        let name = result["Name"]
+                        let maxJobs = int.Parse(result["MaxJobs"])
+                        let currentJobs = int.Parse(result["CurrentJobs"])
+                        select new Worker(id, name, maxJobs, currentJobs)).ToList();
         }
 
         public List<Worker> GetWorkers()
         {
-            List<Worker> workers = new List<Worker>();
-
             var workerKeys = Client.Key.GetAll("Worker*");
-            foreach (string workerKey in workerKeys)
-            {
-                Dictionary<string, string> result = Client.Hash.GetAll(workerKey);
-                int id = int.Parse(result["Id"]);
-                string name = result["Name"];
-                int maxJobs = int.Parse(result["MaxJobs"]);
-                int currentJobs = int.Parse(result["CurrentJobs"]);
 
-                workers.Add(new Worker(id, name, maxJobs, currentJobs));
-            }
-
-            return workers;
+            return (from workerKey in workerKeys
+                    select Client.Hash.GetAll(workerKey)
+                        into result
+                        let id = int.Parse(result["Id"])
+                        let name = result["Name"]
+                        let maxJobs = int.Parse(result["MaxJobs"])
+                        let currentJobs = int.Parse(result["CurrentJobs"])
+                        select new Worker(id, name, maxJobs, currentJobs)).ToList();
         }
 
         public void AddPool(Pool pool)
         {
             string hashId = pool.ToString();
-            Client.Hash.Set(hashId, "Id", pool.Id.ToString());
-            Client.Hash.Set(hashId, "Name", pool.Name);
+            Client.Hash.SetIfNotExist(hashId, "Id", pool.Id.ToString());
+            Client.Hash.SetIfNotExist(hashId, "Name", pool.Name);
         }
 
         public void AddWorkerToPool(Worker worker, Pool pool)
         {
             string hashId = worker.ToString();
-            Client.Hash.Set(hashId, "Id", worker.Id.ToString());
-            Client.Hash.Set(hashId, "Name", worker.Name);
-            Client.Hash.Set(hashId, "MaxJobs", worker.MaxJobs.ToString());
-            Client.Hash.Set(hashId, "CurrentJobs", worker.CurrentJobs.ToString());
-            Client.Hash.Set(hashId, "PoolHashId", pool.ToString());
+            Client.Hash.SetIfNotExist(hashId, "Id", worker.Id.ToString());
+            Client.Hash.SetIfNotExist(hashId, "Name", worker.Name);
+            Client.Hash.SetIfNotExist(hashId, "MaxJobs", worker.MaxJobs.ToString());
+            Client.Hash.SetIfNotExist(hashId, "CurrentJobs", worker.CurrentJobs.ToString());
+            Client.Hash.SetIfNotExist(hashId, "PoolHashId", pool.ToString());
         }
 
         public void UpdateWorker(Worker worker)

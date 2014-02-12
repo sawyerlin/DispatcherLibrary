@@ -31,8 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="sli-redis">
-      <HintPath>..\packages\sli-redis\sli-redis.dll</HintPath>
+    <Reference Include="sli-redis, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\sli-redis.1.0.0\lib\net35\sli-redis.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -56,6 +57,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="DispatcherLibrary.cd" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
