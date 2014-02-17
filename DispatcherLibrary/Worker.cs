@@ -10,6 +10,8 @@ namespace DispatcherLibrary
 
     public class Worker : EventArgs, IServerAvailable
     {
+        private readonly CacheRedis _cache;
+
         public event Action<Worker> WorkerChanged;
 
         public int Id { get; private set; }
@@ -26,10 +28,11 @@ namespace DispatcherLibrary
             CurrentJobs = 0;
         }
 
-        public Worker(int id, string name, int maxJobs, int currentJobs)
+        public Worker(int id, string name, int maxJobs, int currentJobs, CacheRedis cache)
             : this(id, name, maxJobs)
         {
             CurrentJobs = currentJobs;
+            _cache = cache;
         }
 
         public virtual bool AskAvailable()
@@ -44,19 +47,19 @@ namespace DispatcherLibrary
 
             Console.WriteLine("The worker " + Name + string.Format(" (Current: {0}, Max: {1})", CurrentJobs, MaxJobs) + " is working on " + job.Name);
 
-            XElement jobElement = new XElement("Job",
-                new XElement("Id", job.Id),
-                new XElement("Name", job.Name),
-                new XElement("ExecutionTime", job.ExecuteTime),
-                new XElement("State", job.State),
-                new XElement("Worker",
-                    new XElement("Id", Id),
-                    new XElement("Name", Name)
-                    ));
-
-            jobElement.Save(Path.Combine(ConfigurationManager.AppSettings["JobPath"], job.Name + "_" + ToString() + ".xml"));
+            string keyJob = job.ToString();
+            _cache.Client.Hash.Set(keyJob, "Id", job.Id.ToString());
+            _cache.Client.Hash.Set(keyJob, "Name", job.Name);
+            _cache.Client.Hash.Set(keyJob, "ExecuteTime", job.ExecuteTime.ToString());
+            _cache.Client.Hash.Set(keyJob, "State", job.State.ToString());
+            _cache.Client.Hash.Set(keyJob, "Worker", ToString());
 
             return this;
+        }
+
+        public virtual void Update()
+        {
+            _cache.UpdateWorker(this);
         }
 
         public virtual Worker WorkJob()

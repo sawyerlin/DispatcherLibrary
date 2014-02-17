@@ -19,5 +19,10 @@ namespace DispatcherLibrary
             ExecuteTime = executeTime;
             State = state;
         }
+
+        public override string ToString()
+        {
+            return "Job-" + Id;
+        }
     }
 }

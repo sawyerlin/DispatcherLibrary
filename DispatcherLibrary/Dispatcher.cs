@@ -1,26 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace DispatcherLibrary
 {
     public class Dispatcher
     {
-        private const int MaxJobs = 25;
+        private readonly CacheRedis _cache;
 
         private readonly List<Pool> _pools;
-        private readonly Queue<Job> _jobs;
 
-        public bool IsFull { get { return _jobs.Count == MaxJobs; } }
+        private readonly string _producerName;
 
-        public Dispatcher(List<Pool> pools)
+        public Dispatcher(List<Pool> pools, CacheRedis cache, string producername)
         {
             _pools = pools;
-            _jobs = new Queue<Job>();
-        }
-
-        public void AddJob(Job job)
-        {
-            _jobs.Enqueue(job);
+            _cache = cache;
+            _producerName = producername;
         }
 
         public Pool GetAvailablePool()
@@ -31,18 +27,23 @@ namespace DispatcherLibrary
 
         public void Dispatch()
         {
-            while (_jobs.Count > 0)
+            Job job;
+            if ((job = GetJob()) != null)
             {
                 Pool availablePool = GetAvailablePool();
                 if (availablePool != null)
                 {
                     Worker worker = availablePool.GetBestAvailableWorker();
-                    if (worker != null) { 
-                        worker.AllocatJob(_jobs.Dequeue());
-                        availablePool.UpdateWorker(worker);
-                    }
+                    if (worker != null)
+                        worker.AllocatJob(job).Update();
                 }
             }
+        }
+
+        private Job GetJob()
+        {
+            return (Job)JsonConvert.DeserializeObject(
+                _cache.Client.List.DeQueue(_producerName));
         }
     }
 }

@@ -51,7 +51,7 @@ namespace DispatcherLibrary
                         let name = result["Name"]
                         let maxJobs = int.Parse(result["MaxJobs"])
                         let currentJobs = int.Parse(result["CurrentJobs"])
-                        select new Worker(id, name, maxJobs, currentJobs)).ToList();
+                        select new Worker(id, name, maxJobs, currentJobs, this)).ToList();
         }
 
         public List<Worker> GetWorkers()
@@ -65,7 +65,7 @@ namespace DispatcherLibrary
                         let name = result["Name"]
                         let maxJobs = int.Parse(result["MaxJobs"])
                         let currentJobs = int.Parse(result["CurrentJobs"])
-                        select new Worker(id, name, maxJobs, currentJobs)).ToList();
+                        select new Worker(id, name, maxJobs, currentJobs, this)).ToList();
         }
 
         public void AddPool(Pool pool)

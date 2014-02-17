@@ -16,3 +16,5 @@ C:\Dev\DispatcherLibrary\DispatcherMonitor\bin\Debug\DispatcherLibrary.pdb
 C:\Dev\DispatcherLibrary\DispatcherMonitor\obj\Debug\DispatcherMonitor.csprojResolveAssemblyReference.cache
 C:\Dev\DispatcherLibrary\DispatcherMonitor\obj\Debug\DispatcherMonitor.exe
 C:\Dev\DispatcherLibrary\DispatcherMonitor\obj\Debug\DispatcherMonitor.pdb
+C:\Dev\DispatcherLibrary\DispatcherMonitor\bin\Debug\Newtonsoft.Json.dll
+C:\Dev\DispatcherLibrary\DispatcherMonitor\bin\Debug\Newtonsoft.Json.xml
