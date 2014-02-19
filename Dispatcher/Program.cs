@@ -1,4 +1,11 @@
-﻿namespace Dispatcher
+﻿using System;
+using System.IO;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading;
+
+namespace Dispatcher
 {
     using System.Collections.Generic;
     using DispatcherLibrary;
@@ -8,11 +15,16 @@
         private const string ProcuderName = "jobQueue";
         private readonly List<Pool> _pools;
         private readonly CacheRedis _cache;
+        private const int Limit = 4;
 
         static void Main(string[] args)
         {
             Program program = new Program();
-            program.Run();
+            for (int i = 0; i < Limit; i++)
+            {
+                Thread thread = new Thread(program.Run) { Name = "Client " + i };
+                thread.Start();
+            }
         }
 
         public Program()
@@ -43,13 +55,64 @@
             pool2.AddWorker(worker5);
         }
 
+
         public void Run()
         {
-            Dispatcher dispatcher =
-                new Dispatcher(_pools, _cache, ProcuderName);
+            //Dispatcher dispatcher =
+            //    new Dispatcher(_pools, _cache, ProcuderName);
 
+            //while (true)
+            //    dispatcher.Dispatch();
+
+
+
+            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+           {
+               NoDelay = true,
+               SendTimeout = 10000
+           };
+            BufferedStream bufferedStream = null;
+
+            int index = 0;
             while (true)
-                dispatcher.Dispatch();
+            {
+                if (Thread.CurrentThread.Name == "Client 3")
+                {
+
+                }
+                if (ConnectSocket(socket, ref bufferedStream))
+                {
+                    try
+                    {
+                        byte[] bytes = Encoding.UTF8.GetBytes("My first Command " + index + " was sent by [" + Thread.CurrentThread.Name + "]\r\n");
+                        socket.Send(bytes);
+                        index++;
+                        Thread.Sleep(2000);
+                    }
+                    catch (Exception exception)
+                    {
+                        Console.WriteLine(exception.Message);
+                    }
+                }
+            }
+        }
+
+        private bool ConnectSocket(Socket socket, ref BufferedStream stream)
+        {
+            if (!socket.Connected)
+            {
+                socket.Connect("192.168.102.118", 8010);
+                if (!socket.Connected)
+                {
+                    socket.Close();
+                    socket = null;
+                    return false;
+                }
+
+                stream = new BufferedStream(new NetworkStream(socket), 16 * 1024);
+                return true;
+            }
+            return true;
         }
     }
 }
