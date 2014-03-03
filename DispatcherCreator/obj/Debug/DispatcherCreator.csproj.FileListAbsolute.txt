@@ -34,3 +34,4 @@ C:\Dev\DispatcherLibrary\DispatcherCreator\obj\Debug\DispatcherCreator.exe
 C:\Dev\DispatcherLibrary\DispatcherCreator\obj\Debug\DispatcherCreator.pdb
 C:\Dev\DispatcherLibrary\DispatcherCreator\bin\Debug\Newtonsoft.Json.dll
 C:\Dev\DispatcherLibrary\DispatcherCreator\bin\Debug\Newtonsoft.Json.xml
+C:\Dev\DispatcherLibrary\DispatcherCreator\bin\Debug\HeartBeatLibrary.dll

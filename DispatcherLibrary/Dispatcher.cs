@@ -25,7 +25,7 @@ namespace DispatcherLibrary
             return bestPool;
         }
 
-        public void Dispatch()
+        public virtual void Dispatch()
         {
             Job job;
             if ((job = GetJob()) != null)
@@ -40,10 +40,11 @@ namespace DispatcherLibrary
             }
         }
 
-        private Job GetJob()
+        protected Job GetJob()
         {
-            return (Job)JsonConvert.DeserializeObject(
-                _cache.Client.List.DeQueue(_producerName));
+            string job = _cache.Client.List.DeQueue(_producerName);
+            job = job.TrimStart('\'').TrimEnd('\'');
+            return JsonConvert.DeserializeObject<Job>(job);
         }
     }
 }

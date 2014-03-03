@@ -15,7 +15,7 @@ namespace DispatcherLibrary
 
         public void Produce(Job job)
         {
-            string json = JsonConvert.SerializeObject(job);
+            string json = "'" + JsonConvert.SerializeObject(job) + "'";
             _client.Client.List.EnQueue(_name, json);
         }
     }

@@ -11,6 +11,29 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DispatcherMonitor", "Dispat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dispatcher", "Dispatcher\Dispatcher.csproj", "{53CF7723-5774-49D8-854A-7E4FAD8DEE98}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{AB19329E-0073-4F19-88F3-DF78973A91AA}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\DispatcherLibrary.nuspec = NuGet\DispatcherLibrary.nuspec
+		NuGet\NuGet.config = NuGet\NuGet.config
+		NuGet\NuGet.exe = NuGet\NuGet.exe
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DispatcherSlave", "DispatcherSlave\DispatcherSlave.csproj", "{151382E9-D5FB-400B-9165-99398911DF12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DispatcherCreatorSlave", "DispatcherCreatorSlave\DispatcherCreatorSlave.csproj", "{10F04588-D8D0-4DD3-8394-E4C6649FC36C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Creators", "Creators", "{FC785C5D-CA8A-4068-9D45-9B56D5677EF7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dispatchers", "Dispatchers", "{54AC5A51-C556-4936-87DD-B2E1FBB8A5EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Monitors", "Monitors", "{07911E4C-62ED-4B5D-8483-A69386B96DF9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Consumer", "Consumer", "{C2F3DFAE-5B29-4907-ABB2-609DAD1C38C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonitorWeb", "MonitorWeb\MonitorWeb.csproj", "{91EAB5BD-34CD-44B3-B72A-AEEDACCA0E85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TriggerLibrary", "TriggerLibrary\TriggerLibrary.csproj", "{56732E74-0483-4A11-87F7-79B005CF96FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,8 +60,33 @@ Global
 		{53CF7723-5774-49D8-854A-7E4FAD8DEE98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53CF7723-5774-49D8-854A-7E4FAD8DEE98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53CF7723-5774-49D8-854A-7E4FAD8DEE98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{151382E9-D5FB-400B-9165-99398911DF12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{151382E9-D5FB-400B-9165-99398911DF12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{151382E9-D5FB-400B-9165-99398911DF12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{151382E9-D5FB-400B-9165-99398911DF12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10F04588-D8D0-4DD3-8394-E4C6649FC36C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10F04588-D8D0-4DD3-8394-E4C6649FC36C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10F04588-D8D0-4DD3-8394-E4C6649FC36C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10F04588-D8D0-4DD3-8394-E4C6649FC36C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91EAB5BD-34CD-44B3-B72A-AEEDACCA0E85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91EAB5BD-34CD-44B3-B72A-AEEDACCA0E85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91EAB5BD-34CD-44B3-B72A-AEEDACCA0E85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91EAB5BD-34CD-44B3-B72A-AEEDACCA0E85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56732E74-0483-4A11-87F7-79B005CF96FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56732E74-0483-4A11-87F7-79B005CF96FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56732E74-0483-4A11-87F7-79B005CF96FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56732E74-0483-4A11-87F7-79B005CF96FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CEBB76BE-FD73-488D-96DA-64B85826254F} = {C2F3DFAE-5B29-4907-ABB2-609DAD1C38C8}
+		{10F04588-D8D0-4DD3-8394-E4C6649FC36C} = {FC785C5D-CA8A-4068-9D45-9B56D5677EF7}
+		{E9F7F43A-26F1-43BF-9A63-C7E633CD4A05} = {FC785C5D-CA8A-4068-9D45-9B56D5677EF7}
+		{700A7177-3EA2-450C-9855-8772767ECF2B} = {07911E4C-62ED-4B5D-8483-A69386B96DF9}
+		{91EAB5BD-34CD-44B3-B72A-AEEDACCA0E85} = {07911E4C-62ED-4B5D-8483-A69386B96DF9}
+		{151382E9-D5FB-400B-9165-99398911DF12} = {54AC5A51-C556-4936-87DD-B2E1FBB8A5EF}
+		{53CF7723-5774-49D8-854A-7E4FAD8DEE98} = {54AC5A51-C556-4936-87DD-B2E1FBB8A5EF}
 	EndGlobalSection
 EndGlobal

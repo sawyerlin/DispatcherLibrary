@@ -64,27 +64,27 @@ namespace DispatcherLibrary
 
         public virtual Worker WorkJob()
         {
-            string[] files = Directory.GetFiles(ConfigurationManager.AppSettings["JobPath"], "*" + ToString() + ".xml");
+            //string[] files = Directory.GetFiles(ConfigurationManager.AppSettings["JobPath"], "*" + ToString() + ".xml");
 
-            foreach (string file in files)
-            {
+            //foreach (string file in files)
+            //{
 
-                if (WorkingJobs < CurrentJobs)
-                {
-                    string file1 = file + ".ongoing";
-                    try
-                    {
-                        File.Move(file, file1);
-                        Thread thread = new Thread(() => Work(file1));
-                        WorkingJobs++;
-                        thread.Start();
-                    }
-                    catch (IOException)
-                    {
-                        Console.WriteLine("[Exception] The file \"" + Path.GetFileName(file) + "\" is opened by another process.");
-                    }
-                }
-            }
+            //    if (WorkingJobs < CurrentJobs)
+            //    {
+            //        string file1 = file + ".ongoing";
+            //        try
+            //        {
+            //            File.Move(file, file1);
+            //            Thread thread = new Thread(() => Work(file1));
+            //            WorkingJobs++;
+            //            thread.Start();
+            //        }
+            //        catch (IOException)
+            //        {
+            //            Console.WriteLine("[Exception] The file \"" + Path.GetFileName(file) + "\" is opened by another process.");
+            //        }
+            //    }
+            //}
 
             return this;
         }
