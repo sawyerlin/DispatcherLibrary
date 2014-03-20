@@ -60,7 +60,7 @@
 
         public virtual void Work(string jobId)
         {
-            Thread.Sleep(10000); // 10 seconds
+            Thread.Sleep(20000); // 10 seconds
             _cache.Client.Hash.Set(jobId, "State", JobState.Finished.ToString());
             if (CurrentJobs > 0)
             {

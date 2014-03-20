@@ -71,6 +71,20 @@ namespace DispatcherLibrary
                         select new Worker(id, name, maxJobs, currentJobs, this)).ToList();
         }
 
+        public List<Job> GetJobs()
+        {
+            var jobKeys = Client.Key.GetAll("Job*");
+
+            return (from jobKey in jobKeys
+                    select Client.Hash.GetAll(jobKey)
+                        into result
+                        let id = int.Parse(result["Id"])
+                        let name = result["Name"]
+                        let executeTime = TimeSpan.Parse(result["ExecuteTime"])
+                        let state = (JobState)Enum.Parse(typeof(JobState), result["State"])
+                        select new Job(id, name, executeTime, state)).ToList();
+        }
+
         public void AddPool(Pool pool)
         {
             string hashId = pool.ToString();

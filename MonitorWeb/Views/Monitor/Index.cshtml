@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Monitoring";
+}
+
+<h2>Monitoring</h2>
+<div id="monitoringWorkers" style="width: 100%; height: 200px; background-color: #000000; color: #ffffff; overflow: auto;"></div>
+<div id="monitoringJobs" style="width: 100%; height: 200px; background-color: #000000; color: #ffffff; overflow: auto; margin-top: 5px;"></div>
+<div id="begin" style="background-color: #000000; color: #ffffff; padding: 5px 2px; width: 100px; margin-top: 5px;">Begin</div>
+@section scripts {
+    <script src="~/Scripts/jquery.signalR-2.0.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+        $(function () {
+            var monitor = $.connection.monitorHub;
+            monitor.client.updateWorkers = function (workers) {
+                var monitorWorkers = $('#monitoringWorkers');
+                monitorWorkers.empty();
+                $.each(workers, function (index, value) {
+                    monitorWorkers.append($('<div>').text(JSON.stringify(value)));
+                });
+            };
+
+            monitor.client.updateJobs = function (jobs) {
+                var monitorJobs = $('#monitoringJobs');
+                monitorJobs.empty();
+                $.each(jobs, function (index, value) {
+                    var backgroundcolor;
+                    switch (value.State) {
+                        case 2:
+                            backgroundcolor = 'Green';
+                            break;
+                        case 0:
+                        default:
+                            backgroundcolor = 'Blue';
+                            break;
+                    }
+                    monitorJobs.append($('<div>').css('background-color', backgroundcolor).css('color', '#ffffff').text(JSON.stringify(value)));
+                });
+            };
+
+            $.connection.hub.start().done(function () {
+                $('#begin').on('click', function () {
+                    monitor.server.begin();
+                });
+            });
+        });
+    </script>
+}
