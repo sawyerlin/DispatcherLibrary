@@ -1,4 +1,7 @@
 ﻿// This library uses sli-redis for redis communication
+
+using System;
+
 namespace DispatcherLibrary
 {
     using System.Collections.Generic;
@@ -92,6 +95,18 @@ namespace DispatcherLibrary
             Client.Hash.Set(hashId, "Name", worker.Name);
             Client.Hash.Set(hashId, "CurrentJobs", worker.CurrentJobs.ToString());
 
+        }
+
+        public Worker GetWorker(string workerId)
+        {
+            Dictionary<string, string> workerDic = Client.Hash.GetAll(workerId);
+            return new Worker(int.Parse(workerDic["Id"]), workerDic["Name"], int.Parse(workerDic["MaxJobs"]), int.Parse(workerDic["CurrentJobs"]), this);
+        }
+
+        public Job GetJob(string jobId)
+        {
+            Dictionary<string, string> jobDic = Client.Hash.GetAll(jobId);
+            return new Job(int.Parse(jobDic["Id"]), jobDic["Name"], TimeSpan.Parse(jobDic["ExecuteTime"]), (JobState)Enum.Parse(typeof(JobState), jobDic["State"]));
         }
 
         //public void RemoveWorkerFromPool(Worker worker)

@@ -4,7 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Text.RegularExpressions;
 using System.Threading;
+using DispatcherLibrary;
 
 namespace DispatcherConsumer
 {
@@ -13,9 +15,11 @@ namespace DispatcherConsumer
         private volatile bool _shouldStop;
         private readonly TcpListener _listener;
         private const int Limit = 5;
+        private readonly CacheRedis _cache;
 
         internal Server()
         {
+            _cache = new CacheRedis("192.168.102.49", 6379);
             int port = int.Parse(ConfigurationManager.AppSettings["Port"]);
             IPAddress address;
             if (!IPAddress.TryParse(ConfigurationManager.AppSettings["Host"], out address))
@@ -47,7 +51,18 @@ namespace DispatcherConsumer
                 while (socket.Connected)
                 {
                     StreamReader reader = new StreamReader(stream);
-                    string line = "[" + Thread.CurrentThread.Name + "] " + reader.ReadLine();
+                    string value = reader.ReadLine();
+                    if (value == null) return;
+                    Match match = Regex.Match(value, @"(?'command'\w*)\s(?'param1'[^\s]*)\s(?'param2'[^\s]*)", RegexOptions.IgnoreCase);
+                    string command = match.Groups["command"].ToString();
+                    string workerId = match.Groups["param1"].ToString();
+                    string jobId = match.Groups["param2"].ToString();
+                    if (command.Equals("WORK"))
+                    {
+                        Worker worker = _cache.GetWorker(workerId);
+                        worker.Work(jobId);
+                    }
+                    string line = "[" + Thread.CurrentThread.Name + "] " + value;
                     Console.WriteLine(line);
                 }
             }

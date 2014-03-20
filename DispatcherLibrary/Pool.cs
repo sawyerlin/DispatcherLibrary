@@ -26,10 +26,18 @@
 
         public virtual int GetJobsOfAvailableWorkers()
         {
-            int jobs = -1;
+            int jobs;
 
             var availableWorkers = Cache.GetWorkersFromPool(this).Where(worker => worker.AskAvailable()).ToArray();
-            jobs = availableWorkers.Aggregate(jobs, (current, next) => current + next.CurrentJobs);
+            if (availableWorkers.Any())
+            {
+                jobs = 0;
+                jobs = availableWorkers.Aggregate(jobs, (current, next) => current + next.CurrentJobs);
+            }
+            else
+            {
+                jobs = -1;
+            }
 
             return jobs;
         }

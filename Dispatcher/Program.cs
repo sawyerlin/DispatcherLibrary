@@ -33,15 +33,15 @@
             _pools.Add(pool1);
             _pools.Add(pool2);
 
-            Worker worker1 = new Worker(1, "Worker1", 10);
-            Worker worker2 = new Worker(2, "Worker2", 15);
-            Worker worker3 = new Worker(3, "Worker3", 20);
+            Worker worker1 = new Worker(1, "Worker1", 2);
+            Worker worker2 = new Worker(2, "Worker2", 3);
+            Worker worker3 = new Worker(3, "Worker3", 4);
             pool1.AddWorker(worker1);
             pool1.AddWorker(worker2);
             pool1.AddWorker(worker3);
 
-            Worker worker4 = new Worker(4, "Worker4", 22);
-            Worker worker5 = new Worker(5, "Worker5", 30);
+            Worker worker4 = new Worker(4, "Worker4", 2);
+            Worker worker5 = new Worker(5, "Worker5", 3);
             pool2.AddWorker(worker4);
             pool2.AddWorker(worker5);
         }

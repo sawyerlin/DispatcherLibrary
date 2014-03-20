@@ -36,7 +36,7 @@ namespace DispatcherCreator
                 int index = 0;
                 while (true)
                 {
-                    Job job = new Job(index, "Job 8010 " + index, TimeSpan.FromSeconds(10), JobState.UnKnown);
+                    Job job = new Job(index, "Job-8010-" + index, TimeSpan.FromSeconds(10), JobState.UnKnown);
                     if (_heartBeat.IsMaster)
                     {
                         producer.Produce(job);

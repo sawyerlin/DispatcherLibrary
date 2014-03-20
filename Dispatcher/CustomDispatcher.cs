@@ -12,6 +12,8 @@ namespace Dispatcher
     internal class CustomDispatcher : DispatcherLibrary.Dispatcher
     {
         private readonly HeartBeat _heartBeat;
+        private Socket _socket;
+        private BufferedStream _bufferedStream;
 
         public CustomDispatcher(List<Pool> pools, CacheRedis cache, string producername)
             : base(pools, cache, producername)
@@ -22,36 +24,28 @@ namespace Dispatcher
                 };
 
             _heartBeat = new HeartBeat(neighbours, "192.168.102.118", 8012, 0, 10);
-
-        }
-
-        #region Socket Trigger
-
-        public void Run()
-        {
-            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+            _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
             {
                 NoDelay = true,
                 SendTimeout = 10000
             };
-            BufferedStream bufferedStream = null;
+        }
 
-            int index = 0;
-            while (true)
+        #region Socket Trigger
+
+        private void SendCommand(string command)
+        {
+            if (_heartBeat.IsMaster && ConnectSocket(_socket, ref _bufferedStream))
             {
-                if (_heartBeat.IsMaster && ConnectSocket(socket, ref bufferedStream))
+                try
                 {
-                    try
-                    {
-                        byte[] bytes = Encoding.UTF8.GetBytes("My first Command " + index + " was sent by [" + Thread.CurrentThread.Name + "]\r\n");
-                        socket.Send(bytes);
-                        index++;
-                        Thread.Sleep(2000);
-                    }
-                    catch (Exception exception)
-                    {
-                        Console.WriteLine(exception.Message);
-                    }
+                    byte[] bytes = Encoding.UTF8.GetBytes(command + "\r\n");
+                    _socket.Send(bytes);
+                    Thread.Sleep(2000);
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception.Message);
                 }
             }
         }
@@ -82,11 +76,32 @@ namespace Dispatcher
             {
                 if (_heartBeat.IsMaster)
                 {
-                    Job job = GetJob();
-                    if (job != null)
-                        Console.WriteLine(job + " from dispatcher 8012");
+                    Pool pool = GetAvailablePool();
+                    if (pool != null)
+                    {
+                        Worker worker = pool.GetBestAvailableWorker();
+                        if (worker != null)
+                        {
+                            Job job = GetJob();
+                            if (job != null)
+                            {
+                                Console.WriteLine(job + " from dispatcher 8012");
+                                worker.AllocatJob(job);
+                                // WORK worker job
+                                SendCommand(string.Format("WORK {0} {1}", worker, job));
+                            }
+                            else
+                                Console.WriteLine("Job is null from dispatcher 8012");
+                        }
+                        else
+                        {
+                            Console.WriteLine("No worker is available");
+                        }
+                    }
                     else
-                        Console.WriteLine("Job is null from dispatcher 8012");
+                    {
+                        Console.WriteLine("No pool is available");
+                    }
                     Thread.Sleep(1000);
                 }
             }

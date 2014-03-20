@@ -21,8 +21,17 @@ namespace DispatcherLibrary
 
         public Pool GetAvailablePool()
         {
-            Pool bestPool = _pools.OrderBy(pool => pool.GetJobsOfAvailableWorkers()).First();
-            return bestPool;
+            var pools = from pool in _pools
+                        let newPool = new
+                            {
+                                Pool = pool,
+                                CurrentJobs = pool.GetJobsOfAvailableWorkers()
+                            }
+                        where newPool.CurrentJobs != -1
+                        orderby newPool.CurrentJobs
+                        select newPool.Pool;
+
+            return pools.FirstOrDefault();
         }
 
         public virtual void Dispatch()
