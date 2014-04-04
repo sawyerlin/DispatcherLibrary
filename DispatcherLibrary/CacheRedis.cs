@@ -1,6 +1,7 @@
 ﻿// This library uses sli-redis for redis communication
 
 using System;
+using Newtonsoft.Json;
 
 namespace DispatcherLibrary
 {
@@ -85,6 +86,12 @@ namespace DispatcherLibrary
                         select new Job(id, name, executeTime, state)).ToList();
         }
 
+        public List<Job> GetWaitingJobs()
+        {
+            var jobs = Client.List.GetAll("jobQueue");
+            return jobs.Select(JsonConvert.DeserializeObject<Job>).ToList(); 
+        }
+
         public void AddPool(Pool pool)
         {
             string hashId = pool.ToString();
@@ -123,11 +130,6 @@ namespace DispatcherLibrary
             return new Job(int.Parse(jobDic["Id"]), jobDic["Name"], TimeSpan.Parse(jobDic["ExecuteTime"]), (JobState)Enum.Parse(typeof(JobState), jobDic["State"]));
         }
 
-        //public void RemoveWorkerFromPool(Worker worker)
-        //{
-        //    Client.Remove(worker.ToString());
-        //}
-
         public void EmptyRedis()
         {
             //Client.GetAllKeys().ForEach(key => Client.Remove(key));
@@ -135,12 +137,12 @@ namespace DispatcherLibrary
 
         public void SaveStateWhenError()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void RestoreStateAfterError()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

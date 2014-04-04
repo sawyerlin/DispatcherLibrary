@@ -16,12 +16,11 @@ namespace MonitorWeb.Hubs
 
         public void Begin()
         {
-            int index = 1;
             while (true)
             {
+                Clients.All.updateWaitingJobs(GetWaitingJobs());
                 Clients.All.updateWorkers(GetWorkers());
                 Clients.All.updateJobs(GetJobs());
-                index++;
                 Thread.Sleep(500);
             }
         }
@@ -35,6 +34,12 @@ namespace MonitorWeb.Hubs
         private List<Job> GetJobs()
         {
             List<Job> jobs = _cache.GetJobs();
+            return jobs;
+        }
+
+        private List<Job> GetWaitingJobs()
+        {
+            List<Job> jobs = _cache.GetWaitingJobs();
             return jobs;
         }
     }
